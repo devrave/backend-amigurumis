@@ -4,7 +4,6 @@ WORKDIR /app
 COPY pom.xml .
 COPY src ./src
 RUN mvn clean package -DskipTests && cp target/backend-amigurumis-0.0.1-SNAPSHOT.jar target/app.jar
-
 # Etapa 2: Imagen final
 FROM openjdk:17-jdk-alpine
 WORKDIR /app
