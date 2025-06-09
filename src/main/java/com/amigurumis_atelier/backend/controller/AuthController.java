@@ -26,18 +26,18 @@ public class AuthController {
     public ResponseEntity<?> login(@RequestBody LoginRequestDTO loginRequest) {
         Optional<Usuario> usuarioOpt = usuarioRepository.findByCorreo(loginRequest.getCorreo());
         if (usuarioOpt.isEmpty()) {
-            return ResponseEntity.status(401).body("Usuario o contraseña incorrectos");
+            return ResponseEntity.status(401).body(java.util.Collections.singletonMap("error", "Usuario no encontrado"));
         }
         Usuario usuario = usuarioOpt.get();
         if (!usuario.getContrasena().equals(loginRequest.getContrasena())) {
-            return ResponseEntity.status(401).body("Usuario o contraseña incorrectos");
+            return ResponseEntity.status(401).body(java.util.Collections.singletonMap("error", "Contraseña incorrecta"));
         }
         String token = JwtUtil.generateToken(
                 usuario.getCorreo(),
                 usuario.getIdUsuario(),
-                usuario.getRol() != null ? usuario.getRol().getNombreRol() : "USUARIO"
+                usuario.getRol() != null ? usuario.getRol().getNombreRol() : "USER"
         );
-        return ResponseEntity.ok(token);
+        return ResponseEntity.ok(java.util.Collections.singletonMap("token", token));
     }
 
     @PostMapping("/register")
