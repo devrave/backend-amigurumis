@@ -46,7 +46,11 @@ public class SecurityConfig {
     @Bean
     public CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration configuration = new CorsConfiguration();
-        configuration.setAllowedOrigins(Arrays.asList("*")); // Permitir cualquier origen temporalmente para pruebas con Postman
+        configuration.setAllowedOrigins(Arrays.asList(
+            "http://127.0.0.1:5501",
+            "http://localhost:5501",
+            "https://main.d2pyfqpvl5zw8r.amplifyapp.com"
+        ));
         configuration.setAllowedMethods(Arrays.asList("GET", "POST", "PUT", "DELETE", "OPTIONS"));
         configuration.setAllowedHeaders(Arrays.asList("*"));
         configuration.setAllowCredentials(true);
