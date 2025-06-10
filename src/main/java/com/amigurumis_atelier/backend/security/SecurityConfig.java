@@ -28,14 +28,7 @@ public class SecurityConfig {
                 .requestMatchers(
                     "/api/auth/register",
                     "/api/auth/login",
-                    "/api/ping",
-                    "/api/productos/**",
-                    "/api/carritos/**",
-                    "/api/pedidos/**",
-                    "/api/roles/**",
-                    "/api/metodospago/**",
-                    "/api/detallecarrito/**",
-                    "/api/detallepedido/**"
+                    "/api/ping"
                 ).permitAll()
                 .anyRequest().authenticated()
             )

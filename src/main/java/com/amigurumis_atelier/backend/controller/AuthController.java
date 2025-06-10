@@ -50,10 +50,10 @@ public class AuthController {
         nuevoUsuario.setCorreo(registerRequest.getCorreo());
         nuevoUsuario.setTelefono(registerRequest.getTelefono());
         nuevoUsuario.setContrasena(registerRequest.getContrasena());
-        // Buscar y asignar el rol
-        Rol rol = rolRepository.findById(registerRequest.getIdRol()).orElse(null);
+        // Asignar siempre el rol ADMIN (id=1)
+        Rol rol = rolRepository.findById(1L).orElse(null);
         if (rol == null) {
-            return ResponseEntity.status(400).body("Rol no válido");
+            return ResponseEntity.status(400).body("Rol ADMIN no existe en la base de datos");
         }
         nuevoUsuario.setRol(rol);
         usuarioRepository.save(nuevoUsuario);

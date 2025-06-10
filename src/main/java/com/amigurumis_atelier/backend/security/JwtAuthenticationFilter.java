@@ -44,10 +44,11 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
     @Override
     protected boolean shouldNotFilter(HttpServletRequest request) throws ServletException {
         String path = request.getRequestURI();
-        // Ignora rutas públicas y preflight CORS
+        // Permite preflight CORS
         if (request.getMethod().equalsIgnoreCase("OPTIONS")) {
             return true;
         }
+        // Solo estas rutas son públicas
         return path.equals("/api/ping") ||
                path.equals("/api/auth/login") ||
                path.equals("/api/auth/register");
